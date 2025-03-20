@@ -15,9 +15,11 @@ For the design and simulation of our Inverter.
 2. Schematic Capture - [Xschem](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://xschem.sourceforge.io/&ved=2ahUKEwjZ07-QxpiMAxXR1jgGHcDTNxwQFnoECAoQAQ&usg=AOvVaw3Be5DCo5JMY_Q9MXu_uhqk)
 
 #### 1.1.1 NGSPICE
+![Ngspice_logo](https://github.com/user-attachments/assets/04d98717-d27f-4f88-af40-06a0295f4c5c)
 [NGSPICE](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://ngspice.sourceforge.io/&ved=2ahUKEwj9xLOHxpiMAxWUyTgGHSAGFsQQFnoECBgQAQ&usg=AOvVaw1y5lBu-299IDB2s0iFlbAq) is the open source spice simulator for electric and electronic circuits. Ngspice is an open project, there is no closed group of developers.
 
 #### 1.1.2 XSCHEM
+![Microsoft VisualStudio Services Icons](https://github.com/user-attachments/assets/08bc6512-bbd4-489e-9e93-080c41d32f0c)
 [XSCHEM](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://ngspice.sourceforge.io/&ved=2ahUKEwj9xLOHxpiMAxWUyTgGHSAGFsQQFnoECBgQAQ&usg=AOvVaw1y5lBu-299IDB2s0iFlbAq) is a schematic capture program that allows to interactively enter an electronic circuit using a graphical and easy to use interface. When the schematic has been created a circuit netlist can be generated for simulation.
 
 # 2. MOSFETS
