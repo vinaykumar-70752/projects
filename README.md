@@ -112,7 +112,190 @@ Source and Body is shorted to avoid body effect.
 
 ![Screenshot from 2025-03-20 18-23-53](https://github.com/user-attachments/assets/b0a9448f-1d26-4270-a13c-7e65d74784d1)
 
-Hence, we now have all our important values we needed. Same can be done for a PMOS. Motive is same, but expecially to extract the value of Aspect ratio for which the current is the same in both NMOS and PMOS. I have done some experimentation and found that at W/L of PMOS = 4 * (Aspect ratio of NMOS
+Hence, we now have all our important values we needed. Same can be done for a PMOS. Motive is same, but expecially to extract the value of Aspect ratio for which the current is the same in both NMOS and PMOS. I have done some experimentation and found that at W/L of PMOS = 4 * (Aspect ratio of NMOS).
+
+### 2.2.Why NMOS considered as a pull-down network in CMOS?
+Look at the circuit and graph below
+
+![nmos_circuit_for_strong0_weak_1](https://github.com/user-attachments/assets/ffc7474b-adf3-49d3-a7ca-2b47b7a5e6b5)
+![weak1_strong1_plot](https://github.com/user-attachments/assets/cb48a773-59f0-428f-9742-3538d52f1284)
+
+You can see that, when a square wave is applied to the input of NMOS, when it is LOW(0V), the output goes to HIGH(1.8V). But when the input is HIGH(1.8V), the output goes to a value that is much larger than 0V. This is due to the fact that when Vgs is 1.8V, the NMOS is in linear region. This is where the MOSFET acts as a voltage controlled resistor. At this point, the output is connected to a Voltage Divider Configuration. That is the output takes the value which is defined by the voltage across the resistance of the mosfet. Settling of Vout to LOW(0V)depends on the voltage across Resistor. Hence, NMOS is able to transmit STRONG 0, but not a STRONG 1. So NMOS is Strong 0 but a Weak 1. That's why NMOS considered as a pull-down network in CMOS inverter.
+
+
+### 2.3 Why PMOS considered as a pull-up network in CMOS?
+Look at the circuit and graph below
+
+
+![pmos_strong1_weak0](https://github.com/user-attachments/assets/0cf553a0-9acc-43c8-95b5-6f56a24b4c99)
+![plot_weak0_stron1](https://github.com/user-attachments/assets/abd578dc-c22f-4499-9a09-78a7ecd9e56f)
+
+
+The reason is the same as the for the NMOS.
+
+**Hence, neither NMOS nor PMOS would make a great inverter on their own. So we require a transitor which is capable of producing strong 1 and 0 .Now, CMOS came into the picture, which is capable of roducing strong 1 and 0.**
+
+## 3.CMOS INVERTER DESIGN AND ANALYSIS
+
+### 3.1 why we shifted to CMOS?
+An interesting obseration was made in the previous section, where we realised that neither NMOS nor PMOS can be used for design that can produce either values, HIGH and LOW. This enables to an idea of attaching them together. Since, PMOS is a Strong 1, we put it between VDD and Vout and NMOS being a STRONG 0, it is placed between Vout and GND. This way, either can act as a low resistive load to the other transistor. The configuration looks like what we have below. This is referred to as Complimentary Metal Oxide Semiconductor(CMOS) Configuration and it also represents the simplest circuit known as the CMOS Inverter.
+
+CMOS Circuits generally consists of a network split into two parts, Upper one referred to as a pull up network and the lower half as a pull down network. The former consists of P-channel MOSFETs and later N-Channel MOSFETs. Reason is simple that as one transistor is one, another is off. This eliminates the issue of an resistive path to the ground (offers low resistance) . This way, one can easily achieve a Strong High and a Strong LOW from the same network. PULL UP is what offers a low resistance path to the VDD and PULL DOWN is what offers a low resistance path the GND.
+
+![cmos_circuit](https://github.com/user-attachments/assets/b4e48bd7-e75b-4aaf-bdbb-678a76aff5d8)
+
+### 3.2 CMOS PRE-LAYOUT DESIGN
+![cmos_circuit](https://github.com/user-attachments/assets/b70cf22f-0917-4e6d-8010-559cc6e7a67e)
+![inverter_symbol](https://github.com/user-attachments/assets/24a27d37-bf88-438b-9ddf-bb1f61552335)
+
+CMOS is nothing but the transistor which complements the input i.e, if Vin is logic 0(0V) Vout is equal to logic 1(1.8V). 
+#### 3.2.1 WORKING
+1. case(i)  :- when Vin=0V(logic 0) ; NMOS= OFF; PMOS=ON; Vout=1.8V(logic 1)
+
+3. case(ii) :- when Vin=1.8V(logic 1) ; NMOS= ON; PMOS=OFF; Vout=0V(logic 0)
+### 3.3 DC Analysis and Important design parameters
+#### 3.3.1 VOLTAGE CHARACTERISTICS OF CMOS
+DC analysis would be used to plot a Voltage Transfer Characteristics (VTC) curve for the circuit. It will sweep the value of Vin from high to low to determine the working of circuit with respect to different voltage levels in the input. The following plot is observed when simulated :
+
+![VTC](https://github.com/user-attachments/assets/66e7d31e-e2d2-481d-a333-d70060f0bb29)
+
+A voltage transfer characteristics paints a plot that shows the behavior of a device when it's input is changed(full swing). It shows what happens to the output as input changes. In our case, for an inverter we can see a plot that is like a square wave(non ideal), that changes it's nature around 0.75 volts of input. So ideally   there are like 3 regions in the VTC curve, the portion where output is high, the place of transistion (Gain is inifinte) and the one where the output goes low. But practically there are five regions of operation and they are based on the working of inverter constituents, that is the NMOS and the PMOS transistors with respect to the change in the input voltage. 
+
+![regions](https://github.com/user-attachments/assets/0c052c8c-eb40-4d04-8156-6c3e085c7622)
+
+### 3.4 IMPORTANT PARAMETER ANALYSIS
+#### 3.4.1. Trip point
+The point where the Vout and Vin curves meet.
+
+lets observe the Trip point of CMOS.
+
+![trip](https://github.com/user-attachments/assets/5ecb973a-c887-4f17-94b8-78d19eb0a273)
+
+![Screenshot from 2025-03-21 14-35-27](https://github.com/user-attachments/assets/bc3d8677-68b6-48e1-8200-009b97d4e074)
+
+**command I run in xterm to observe the trip point is :**
+"setplot dc1
+
+plot vin vout
+
+meas dc Vm when vin=vout"
+
+**RESULT :** Vm =0.839V (considered W/L ratio of Nmos = 1 and  W/L ratio of pmos = 2) 
+
+#### 3.4.2 Gain
+The derivative of Vout with respective to Vin called as **Gain**.
+
+The following plot help us gain at different regions of voltage transfer characteristics curve.
+
+![gain0](https://github.com/user-attachments/assets/88866b24-6441-4bda-9d6f-de85f67bf63f)
+
+The following plot help us **absolute value** of gain at different regions of voltage transfer characteristics curve.
+![abs_gain](https://github.com/user-attachments/assets/23b6b389-4e53-4340-97df-92cf3f50aac3)
+
+
+**The command I run in xterm is :**
+
+" setplot dc1
+
+let gain = deriv(Vout)
+
+plot gain "
+
+**For absolute gain :**
+
+" setplot dc1
+
+let gain = abs(deriv(Vout)) >= 1
+
+plot gain "
+
+
+
+
+**Observation :** 
+1. The voltages that are less than VIL get gain=0.
+
+2. The  voltages that are greater than VIH get gain=0.
+   
+3. The voltages between VIL and VIH get high gain. 
+
+I will define VIH and VIL voltages in next session.
+
+#### 3.4.3 DEFINING VIH,VIL,VOH AND VOL
+
+1.**VOH -** Maximum output voltage when it is logic '1'.
+
+2.**VOL -** Minimum output voltage when it is logic '0'.
+
+3.**VIH -** Maximum input voltage that can be interpreted as logic '0'.
+
+4.**VIL -** Minimum input voltage that can be interpreted as logic '1'.
+
+![noise](https://github.com/user-attachments/assets/8321e5b2-5c75-4a88-a634-fd99602feed4)
+
+**command for VIH :**
+
+" setplot dc1
+
+plot vout vin
+
+let gain=(abs(deriv(Vout))) >= 1
+
+meas dc VIH find vin when gain=1 cross=last "
+
+**command for VLH :**
+
+" setplot dc1
+
+plot vout vin
+
+let gain=(abs(deriv(Vout))) >= 1
+
+meas dc VLH find vin when gain=1 cross=1 "
+
+**observation :**
+VIH = 0.980V
+
+VIL = 0.744V
+
+#### 3.4.4 NOISE MARGIN
+
+In the previous section we observed the VIH and VIL values
+
+Noise margins are defined as the range of values for which the device can work noise free or with high resistance to noise. This is an important parameter for digital circuits, since they work with a set of specific values(2 for binary systems), so it becomes crucial to know what values of the voltages can it make its self noise free. This range is also referred to as Noise Immunity. There are two such values of Noise margins for a binary system:
+
+**NML(Noise Margin for Low) :-** VIL - VOL (here VOL = 0V)
+
+**NMH(Noise Margin for HIGH) :-** VOH - VIH (here VOH = 1.8V)
+
+**OBSERVATION :**
+1.NML = VIL - VOL =  0.744 - 0 = 0.744V.
+
+2.NMH = VOH - VIH =  1.8 - 0.980 = 0.820V.
+
+3. The range between these voltages (0.744-0.820) the output is undefined.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
