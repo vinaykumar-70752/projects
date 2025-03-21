@@ -10,24 +10,24 @@ Let's get dive into project.
 ![Screenshot from 2025-03-20 16-29-39](https://github.com/user-attachments/assets/9ac0b2b0-8dbb-4add-9d68-ad8bd175ce39)
 
 # 1. TOOLS USED
-### 1.1 TOOLS
+## 1.1 TOOLS
 For the design and simulation of our Inverter.
 1. Spice netlist simulation - [Ngspice](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://ngspice.sourceforge.io/&ved=2ahUKEwj9xLOHxpiMAxWUyTgGHSAGFsQQFnoECBgQAQ&usg=AOvVaw1y5lBu-299IDB2s0iFlbAq)
    
 2. Schematic Capture - [Xschem](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://xschem.sourceforge.io/&ved=2ahUKEwjZ07-QxpiMAxXR1jgGHcDTNxwQFnoECAoQAQ&usg=AOvVaw3Be5DCo5JMY_Q9MXu_uhqk)
 
-#### 1.1.1 NGSPICE
+### 1.1.1 NGSPICE
 ![Ngspice_logo](https://github.com/user-attachments/assets/04d98717-d27f-4f88-af40-06a0295f4c5c)
 
 [NGSPICE](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://ngspice.sourceforge.io/&ved=2ahUKEwj9xLOHxpiMAxWUyTgGHSAGFsQQFnoECBgQAQ&usg=AOvVaw1y5lBu-299IDB2s0iFlbAq) is the open source spice simulator for electric and electronic circuits. Ngspice is an open project, there is no closed group of developers.
 
-#### 1.1.2 XSCHEM
+### 1.1.2 XSCHEM
 ![Microsoft VisualStudio Services Icons](https://github.com/user-attachments/assets/08bc6512-bbd4-489e-9e93-080c41d32f0c)
 
 [XSCHEM](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://ngspice.sourceforge.io/&ved=2ahUKEwj9xLOHxpiMAxWUyTgGHSAGFsQQFnoECBgQAQ&usg=AOvVaw1y5lBu-299IDB2s0iFlbAq) is a schematic capture program that allows to interactively enter an electronic circuit using a graphical and easy to use interface. When the schematic has been created a circuit netlist can be generated for simulation.
 
 # 2. MOSFETS
-### 2.1 What is Mosfet?
+## 2.1 What is Mosfet?
 A MOSFET (Metal-Oxide-Semiconductor Field-Effect Transistor) is a type of transistor used for switching and amplifying electronic signals.
 
 A MOSFET has **Four** main terminals:
@@ -91,7 +91,7 @@ slowly increases, after nearly crossing Vth, current first enters into saturatio
 
 .end"
 
-### 2.3 GENERAL ANALYSIS OF PMOS
+## 2.3 GENERAL ANALYSIS OF PMOS
 
 **THE CIRCUIT OF PMOS IS BELOW**
 
@@ -123,7 +123,7 @@ Look at the circuit and graph below
 You can see that, when a square wave is applied to the input of NMOS, when it is LOW(0V), the output goes to HIGH(1.8V). But when the input is HIGH(1.8V), the output goes to a value that is much larger than 0V. This is due to the fact that when Vgs is 1.8V, the NMOS is in linear region. This is where the MOSFET acts as a voltage controlled resistor. At this point, the output is connected to a Voltage Divider Configuration. That is the output takes the value which is defined by the voltage across the resistance of the mosfet. Settling of Vout to LOW(0V)depends on the voltage across Resistor. Hence, NMOS is able to transmit STRONG 0, but not a STRONG 1. So NMOS is Strong 0 but a Weak 1. That's why NMOS considered as a pull-down network in CMOS inverter.
 
 
-### 2.3 Why PMOS considered as a pull-up network in CMOS?
+## 2.3 Why PMOS considered as a pull-up network in CMOS?
 Look at the circuit and graph below
 
 
@@ -135,21 +135,21 @@ The reason is the same as the for the NMOS.
 
 **Hence, neither NMOS nor PMOS would make a great inverter on their own. So we require a transitor which is capable of producing strong 1 and 0 .Now, CMOS came into the picture, which is capable of roducing strong 1 and 0.**
 
-## 3.CMOS INVERTER DESIGN AND ANALYSIS
+# 3.CMOS INVERTER DESIGN AND ANALYSIS
 
-### 3.1 why we shifted to CMOS?
+## 3.1 why we shifted to CMOS?
 An interesting obseration was made in the previous section, where we realised that neither NMOS nor PMOS can be used for design that can produce either values, HIGH and LOW. This enables to an idea of attaching them together. Since, PMOS is a Strong 1, we put it between VDD and Vout and NMOS being a STRONG 0, it is placed between Vout and GND. This way, either can act as a low resistive load to the other transistor. The configuration looks like what we have below. This is referred to as Complimentary Metal Oxide Semiconductor(CMOS) Configuration and it also represents the simplest circuit known as the CMOS Inverter.
 
 CMOS Circuits generally consists of a network split into two parts, Upper one referred to as a pull up network and the lower half as a pull down network. The former consists of P-channel MOSFETs and later N-Channel MOSFETs. Reason is simple that as one transistor is one, another is off. This eliminates the issue of an resistive path to the ground (offers low resistance) . This way, one can easily achieve a Strong High and a Strong LOW from the same network. PULL UP is what offers a low resistance path to the VDD and PULL DOWN is what offers a low resistance path the GND.
 
 ![cmos_circuit](https://github.com/user-attachments/assets/b4e48bd7-e75b-4aaf-bdbb-678a76aff5d8)
 
-### 3.2 CMOS PRE-LAYOUT DESIGN
+## 3.2 CMOS PRE-LAYOUT DESIGN
 ![cmos_circuit](https://github.com/user-attachments/assets/b70cf22f-0917-4e6d-8010-559cc6e7a67e)
 ![inverter_symbol](https://github.com/user-attachments/assets/24a27d37-bf88-438b-9ddf-bb1f61552335)
 
 CMOS is nothing but the transistor which complements the input i.e, if Vin is logic 0(0V) Vout is equal to logic 1(1.8V). 
-#### 3.2.1 WORKING
+### 3.2.1 WORKING
 1. case(i)  :- when Vin=0V(logic 0) ; NMOS= OFF; PMOS=ON; Vout=1.8V(logic 1)
 
 3. case(ii) :- when Vin=1.8V(logic 1) ; NMOS= ON; PMOS=OFF; Vout=0V(logic 0)
@@ -163,8 +163,10 @@ A voltage transfer characteristics paints a plot that shows the behavior of a de
 
 ![regions](https://github.com/user-attachments/assets/0c052c8c-eb40-4d04-8156-6c3e085c7622)
 
-### 3.4 IMPORTANT PARAMETER ANALYSIS
-#### 3.4.1. Trip point
+## 3.4 IMPORTANT PARAMETER ANALYSIS
+
+### 3.4.1. Trip point
+
 The point where the Vout and Vin curves meet.
 
 lets observe the Trip point of CMOS.
@@ -174,6 +176,7 @@ lets observe the Trip point of CMOS.
 ![Screenshot from 2025-03-21 14-35-27](https://github.com/user-attachments/assets/bc3d8677-68b6-48e1-8200-009b97d4e074)
 
 **command I run in xterm to observe the trip point is :**
+
 "setplot dc1
 
 plot vin vout
@@ -182,7 +185,7 @@ meas dc Vm when vin=vout"
 
 **RESULT :** Vm =0.839V (considered W/L ratio of Nmos = 1 and  W/L ratio of pmos = 2) 
 
-#### 3.4.2 Gain
+### 3.4.2 Gain
 The derivative of Vout with respective to Vin called as **Gain**.
 
 The following plot help us gain at different regions of voltage transfer characteristics curve.
@@ -213,6 +216,7 @@ plot gain "
 
 
 **Observation :** 
+
 1. The voltages that are less than VIL get gain=0.
 
 2. The  voltages that are greater than VIH get gain=0.
@@ -221,7 +225,7 @@ plot gain "
 
 I will define VIH and VIL voltages in next session.
 
-#### 3.4.3 DEFINING VIH,VIL,VOH AND VOL
+### 3.4.3 DEFINING VIH,VIL,VOH AND VOL
 
 1.**VOH -** Maximum output voltage when it is logic '1'.
 
@@ -254,11 +258,12 @@ let gain=(abs(deriv(Vout))) >= 1
 meas dc VLH find vin when gain=1 cross=1 "
 
 **observation :**
-VIH = 0.980V
 
-VIL = 0.744V
+1. VIH = 0.980V
 
-#### 3.4.4 NOISE MARGIN
+2. VIL = 0.744V
+
+### 3.4.4 NOISE MARGIN
 
 In the previous section we observed the VIH and VIL values
 
@@ -269,11 +274,131 @@ Noise margins are defined as the range of values for which the device can work n
 **NMH(Noise Margin for HIGH) :-** VOH - VIH (here VOH = 1.8V)
 
 **OBSERVATION :**
+
 1.NML = VIL - VOL =  0.744 - 0 = 0.744V.
 
 2.NMH = VOH - VIH =  1.8 - 0.980 = 0.820V.
 
 3. The range between these voltages (0.744-0.820) the output is undefined.
+
+### 3.4.5 DELAY IN CMOS
+
+Time taken for the output to transition from VDD to 50% of supply voltage(VDD) after the input crosses 0 to 50% of supply voltage(VDD)​. Main delay we consider is 50%-50% delay (tPHL​ (High-to-Low delay) or tPLH​ (Low-to-High delay)).
+
+**BASIC TERMS IN DELAY:**
+
+**1.RISE TIME :** The time required for the output voltage to transition from 10% to 90% of its final value.
+
+**2.FALL TIME :** The time required for the output voltage to transition from 90% to 10% of its initial value.
+
+
+
+![delay](https://github.com/user-attachments/assets/c60c85f6-0c9e-4a83-a483-6bd5e1ca2708)
+
+Following commands in Xterm are useful to observe delay in CMOS. 
+
+![Screenshot from 2025-03-21 19-04-32](https://github.com/user-attachments/assets/6c3f469a-2796-434e-a817-e47c2325aba9)
+
+COMMAND : 
+
+"meas dc vin50 when Vin=0.9 RISE=2
+
+meas dc vout50 when Vout=0.9 FALL=2
+
+let delay=vout50-vin50
+
+print delay"
+
+
+**OBSERVATION  :** 
+
+1. I get delay = 6.8071*e^-11 sec.
+
+To observe the **rise time** the following commands should be followed and attached netlist too to following image.
+
+![Screenshot from 2025-03-21 19-09-00](https://github.com/user-attachments/assets/89e416ab-b99a-4a8e-809a-047c62437e22)
+
+
+COMMAND : 
+
+"meas dc vin10 when Vin=0.18 RISE=2
+
+meas dc vin90  when Vout=1.62 RISE=2
+
+let risetime =vin90-vin10
+
+print risetime"
+
+To observe the **fall time** the following commands should be followed and attached netlist too to following image.
+
+![Screenshot from 2025-03-21 19-07-14](https://github.com/user-attachments/assets/0c26f358-1b15-4826-be52-ac7ce8c61669)
+
+
+COMMAND : 
+
+"meas dc vin10 when Vin=0.18 RISE=2
+
+meas dc vin90  when Vout=1.62 RISE=2
+
+let falltime =vin90-vin10
+
+print falltime"
+
+OBSERVATION :
+
+fall time = 8.0*e^-11 sec.
+
+### 3.4.6 DEPENDANCE OF DELAY
+
+Delay depends on mainly three parameters
+
+they are :
+
+1. Supply voltage(Vdd).
+2. Aspect ratio.
+3. Capacitor load.
+
+#### **3.4.6.1 DEPENDANCE OF DELAY ON SUPPLY VOLTAGE :**
+
+Initially I set the voltage to Vdd = 1.8V and got the result as  Dealy = 6.80*e^-11 sec.
+
+Now I reduced the supply voltage Vdd to 1V.
+
+observe the image below.
+
+![Screenshot from 2025-03-21 19-31-47](https://github.com/user-attachments/assets/d5eac33e-c7c2-4f2c-bfbb-e666633b4a0e)
+
+**OBSERVATION :**
+
+1. delay has increased to 1.3132*e^-10.
+
+**RESULT :**
+
+1. The delay increases as we decreases the Supply voltage (Vdd).
+   
+2. **Delay is indirectly proportional to supply voltage.**
+
+#### **3.4.6.1 DEPENDANCE OF ASPECT RATIO :**
+
+The W/L ratio (Width-to-Length ratio) of a MOSFET affects its drive current (Idrive​), which in turn influences the propagation delay (tp​).
+
+Key Relationship:
+
+The propagation delay in a CMOS circuit is given by:
+
+tp = (CL*VDD)/(Idrive current)
+
+If Aspect ratio is increased the Idrive current increases , further it decreases the delay.
+
+First I kept width of the nmos and pmos are 1 and 2. and the delay I observed is 
+
+Let's observe : 
+
+![Screenshot from 2025-03-21 19-51-08](https://github.com/user-attachments/assets/ab9aad12-d340-4bbd-ba32-0a8a8065563d)
+
+
+
+
 
 
 
