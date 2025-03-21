@@ -1,4 +1,4 @@
-# ANALYSIS OF CMOS INVERTER USING NGSPICE
+# DESIGN AND ANALYSIS OF CMOS INVERTER USING NGSPICE
 
 This project is aim to design the CMOS(inverter) and analyse and understand the parameters of inverter.The design will utilise the models that are present under the skywater 130nm pdk and various open source tools such as **Xschem, NGSPICE**. 
 
@@ -9,9 +9,12 @@ Let's get dive into project.
 
 ![Screenshot from 2025-03-20 16-29-39](https://github.com/user-attachments/assets/9ac0b2b0-8dbb-4add-9d68-ad8bd175ce39)
 
+
 # 1. TOOLS USED
 ## 1.1 TOOLS
+
 For the design and simulation of our Inverter.
+
 1. Spice netlist simulation - [Ngspice](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://ngspice.sourceforge.io/&ved=2ahUKEwj9xLOHxpiMAxWUyTgGHSAGFsQQFnoECBgQAQ&usg=AOvVaw1y5lBu-299IDB2s0iFlbAq)
    
 2. Schematic Capture - [Xschem](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://xschem.sourceforge.io/&ved=2ahUKEwjZ07-QxpiMAxXR1jgGHcDTNxwQFnoECAoQAQ&usg=AOvVaw3Be5DCo5JMY_Q9MXu_uhqk)
@@ -114,7 +117,7 @@ Source and Body is shorted to avoid body effect.
 
 Hence, we now have all our important values we needed. Same can be done for a PMOS. Motive is same, but expecially to extract the value of Aspect ratio for which the current is the same in both NMOS and PMOS. I have done some experimentation and found that at W/L of PMOS = 4 * (Aspect ratio of NMOS).
 
-### 2.2.Why NMOS considered as a pull-down network in CMOS?
+## 2.4 Why NMOS considered as a pull-down network in CMOS?
 Look at the circuit and graph below
 
 ![nmos_circuit_for_strong0_weak_1](https://github.com/user-attachments/assets/ffc7474b-adf3-49d3-a7ca-2b47b7a5e6b5)
@@ -123,7 +126,7 @@ Look at the circuit and graph below
 You can see that, when a square wave is applied to the input of NMOS, when it is LOW(0V), the output goes to HIGH(1.8V). But when the input is HIGH(1.8V), the output goes to a value that is much larger than 0V. This is due to the fact that when Vgs is 1.8V, the NMOS is in linear region. This is where the MOSFET acts as a voltage controlled resistor. At this point, the output is connected to a Voltage Divider Configuration. That is the output takes the value which is defined by the voltage across the resistance of the mosfet. Settling of Vout to LOW(0V)depends on the voltage across Resistor. Hence, NMOS is able to transmit STRONG 0, but not a STRONG 1. So NMOS is Strong 0 but a Weak 1. That's why NMOS considered as a pull-down network in CMOS inverter.
 
 
-## 2.3 Why PMOS considered as a pull-up network in CMOS?
+## 2.5 Why PMOS considered as a pull-up network in CMOS?
 Look at the circuit and graph below
 
 
@@ -360,7 +363,7 @@ they are :
 
 #### **3.4.6.1 DEPENDANCE OF DELAY ON SUPPLY VOLTAGE :**
 
-Initially I set the voltage to Vdd = 1.8V and got the result as  Dealy = 6.80*e^-11 sec.
+Initially I set the voltage to Vdd = 1.8V and got the result as  Dealy = 6.80*e^-11 ns.
 
 Now I reduced the supply voltage Vdd to 1V.
 
@@ -370,7 +373,7 @@ observe the image below.
 
 **OBSERVATION :**
 
-1. delay has increased to 1.3132*e^-10.
+1. delay has increased to 1.3132*e^-10 ns.
 
 **RESULT :**
 
@@ -378,7 +381,7 @@ observe the image below.
    
 2. **Delay is indirectly proportional to supply voltage.**
 
-#### **3.4.6.1 DEPENDANCE OF ASPECT RATIO :**
+#### **3.4.6.2 DEPENDANCE OF ASPECT RATIO :**
 
 The W/L ratio (Width-to-Length ratio) of a MOSFET affects its drive current (Idrive​), which in turn influences the propagation delay (tp​).
 
@@ -390,11 +393,82 @@ tp = (CL*VDD)/(Idrive current)
 
 If Aspect ratio is increased the Idrive current increases , further it decreases the delay.
 
-First I kept width of the nmos and pmos are 1 and 2. and the delay I observed is 
+First I kept width of the nmos and pmos are 1 and 2 respectively . And the delay I observed is 6.80*e^-11 ns. 
 
 Let's observe : 
 
 ![Screenshot from 2025-03-21 19-51-08](https://github.com/user-attachments/assets/ab9aad12-d340-4bbd-ba32-0a8a8065563d)
+
+Then I changed the width of nmos and pmos to 2 and 4 respectively. The delay is.......
+
+![Screenshot from 2025-03-21 19-51-08](https://github.com/user-attachments/assets/b915d129-70ed-42b7-a4c9-89806b2f21ef)
+
+The delay supprisingly not decreased much due to the fact that delay is proportional to load capacitor too.As size increases the load capacitors capacitance increases 
+which constants the delay.
+
+**OBSERVATION :**
+
+**1. Here I observed that delay will decrease (but not as much) as we increase the width of transistor.**   
+
+#### **3.4.6.3 DEPENDANCE OF LOAD CAPACITOR :**
+
+The delay of CMOS is directly proportional to load capacitor which is connected at output node.
+
+Firstly I kept constant width and kept the capacitive load = 1 picofarad. And the delay I observed is = 9.904*e^-10
+
+![Screenshot from 2025-03-22 00-07-23](https://github.com/user-attachments/assets/449f6953-8924-493e-8ab6-aa021468fca1)
+
+**Changes :**
+
+Drop the capacitance to 0.5 picofarad and observe the delay.
+
+![Screenshot from 2025-03-21 23-59-52](https://github.com/user-attachments/assets/01896d27-de9e-4cae-bf4d-23f9ce4aa1a1)
+
+**RESULT :**
+
+1. Delay is decreased to 5.316*e^-10
+
+**OBSERVATION :**
+
+1. I observed that to decrease the delay in cmos decrease the load capacitance.
+
+# 4.STACKING EFFECT
+
+To know about stacking effect we should familiar with some terms.
+
+**SUB-THRESHOLD LEAKAGE :**  It is a short channel effect, it is nothing but the leakage current flowing eventhough Vgs = 0V .This is because of diffusin current flowing when we brought drain close to source. As per our requirement we should reduce the leakage current. To reduce reduce it we have alternative way is to increasing the **Threshold voltage**.
+
+To increase the threshold voltage without degrading the performance is achieved by **stacking effect**.
+
+**STACKING EFFECT :** stacking effect is phenomenon where multiple transistors in series lead to reduced subthreshold leakage current. This is particularly important in low-power digital circuit design.
+
+**BEFORE STACKING :** 
+
+Below are the ciruits and observation I made during simulation :
+
+![Screenshot from 2025-03-22 01-16-34](https://github.com/user-attachments/assets/858efab6-1943-492f-9eae-21a4ef888bb4)
+
+observe the ids#branch current (Ids) value at Vgs = 0V and it is Ids = -4.86*e^-15.
+
+**AFTER STACKING :**
+
+![Screenshot from 2025-03-22 01-16-52](https://github.com/user-attachments/assets/963d7c33-f696-4310-888e-4398a8edef4c)
+
+observe the ids#branch current (Ids) value at Vgs = 0V and not Ids decreased to  -8.985*e^-15.
+
+**OBSERVATION:**
+
+1. I observed that by stacking transistor we can reduce the leakage current.
+ 
+2. Due to stacking, threshold voltage increases without affecting performance due to
+   a) Body effect
+   b) DIBL(Drain Induced Barrier Lowering).
+
+
+
+
+
+
 
 
 
