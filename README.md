@@ -46,7 +46,7 @@ A MOSFET has **Four** main terminals:
 MOS (Metal-Oxide-Semiconductor) transistors are primarily divided into two types :
 1. **NMOS** - which uses p-type substrate 
 2. **PMOS** - which uses n-type substrate
-### 2.2 GENERAL ANALYSIS OF NMOS
+## 2.2 GENERAL ANALYSIS OF NMOS
 In this section characteristics of NMOS is analysed
 
 **THE CIRCUIT OF NMOS IS BELOW**
@@ -361,7 +361,7 @@ they are :
 2. Aspect ratio.
 3. Capacitor load.
 
-#### **3.4.6.1 DEPENDANCE OF DELAY ON SUPPLY VOLTAGE :**
+#### **3.4.6.1 DEPENDENCE OF DELAY ON SUPPLY VOLTAGE :**
 
 Initially I set the voltage to Vdd = 1.8V and got the result as  Dealy = 6.80*e^-11 ns.
 
@@ -381,7 +381,7 @@ observe the image below.
    
 2. **Delay is indirectly proportional to supply voltage.**
 
-#### **3.4.6.2 DEPENDANCE OF ASPECT RATIO :**
+#### **3.4.6.2 DEPENDENCE OF ASPECT RATIO :**
 
 The W/L ratio (Width-to-Length ratio) of a MOSFET affects its drive current (Idrive​), which in turn influences the propagation delay (tp​).
 
@@ -410,7 +410,7 @@ which constants the delay.
 
 **1. Here I observed that delay will decrease (but not as much) as we increase the width of transistor.**   
 
-#### **3.4.6.3 DEPENDANCE OF LOAD CAPACITOR :**
+#### **3.4.6.3 DEPENDENCE OF LOAD CAPACITOR :**
 
 The delay of CMOS is directly proportional to load capacitor which is connected at output node.
 
